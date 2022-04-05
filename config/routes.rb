@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :orders
+  resources :baskets
   resources :glasses
  # resources :prices
   # resources :users
@@ -24,6 +26,7 @@ Rails.application.routes.draw do
    get 'frameprice/:price_id', to: 'frames#get_frame_price'
    get 'lenses', to: 'lenses#show_lenses'
    get 'lenseprice/:price_id', to: 'lenses#get_lense_price'
+   resources :glasses
   end
   end
 end
