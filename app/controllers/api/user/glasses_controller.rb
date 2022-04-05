@@ -18,7 +18,7 @@ class Api::User::GlassesController < ApplicationController
             glasses = Glasses.create(
                 frame_id: frame.id,
                 lense_id: lense.id,
-                price: price_frame.currency
+                price: price_frame.currency + price_lense.currency
             )
         end
         if glasses
