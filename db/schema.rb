@@ -10,11 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_04_184946) do
+ActiveRecord::Schema.define(version: 2022_04_05_024944) do
 
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "baskets", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "glass_id"
   end
 
   create_table "frames", force: :cascade do |t|
@@ -27,6 +33,15 @@ ActiveRecord::Schema.define(version: 2022_04_04_184946) do
     t.integer "price_id"
   end
 
+  create_table "glasses", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "frame_id"
+    t.integer "lense_id"
+    t.string "currency"
+    t.float "price"
+  end
+
   create_table "lenses", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -35,6 +50,13 @@ ActiveRecord::Schema.define(version: 2022_04_04_184946) do
     t.string "presecription_type"
     t.string "lense_type"
     t.integer "price_id"
+    t.integer "stock"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "glass_id"
   end
 
   create_table "prices", force: :cascade do |t|
@@ -54,6 +76,10 @@ ActiveRecord::Schema.define(version: 2022_04_04_184946) do
     t.string "currency"
   end
 
+  add_foreign_key "baskets", "glasses"
   add_foreign_key "frames", "prices"
+  add_foreign_key "glasses", "frames"
+  add_foreign_key "glasses", "lenses"
   add_foreign_key "lenses", "prices"
+  add_foreign_key "orders", "glasses"
 end
